@@ -4,7 +4,7 @@
 #
 Name     : exempi
 Version  : 2.3.0
-Release  : 1
+Release  : 2
 URL      : https://libopenraw.freedesktop.org/download/exempi-2.3.0.tar.bz2
 Source0  : https://libopenraw.freedesktop.org/download/exempi-2.3.0.tar.bz2
 Summary  : Library for easy parsing of XMP metadata.
@@ -15,6 +15,7 @@ Requires: exempi-lib
 Requires: exempi-doc
 BuildRequires : boost-dev
 BuildRequires : expat-dev
+BuildRequires : pkgconfig(zlib)
 BuildRequires : valgrind
 
 %description
@@ -61,6 +62,7 @@ lib components for the exempi package.
 
 %build
 export LANG=C
+export SOURCE_DATE_EPOCH=1484415448
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -72,6 +74,7 @@ export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
+export SOURCE_DATE_EPOCH=1484415448
 rm -rf %{buildroot}
 %make_install
 
@@ -88,8 +91,8 @@ rm -rf %{buildroot}
 /usr/include/exempi-2.0/exempi/xmp.h
 /usr/include/exempi-2.0/exempi/xmpconsts.h
 /usr/include/exempi-2.0/exempi/xmperrors.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libexempi.so
+/usr/lib64/pkgconfig/exempi-2.0.pc
 
 %files doc
 %defattr(-,root,root,-)
@@ -97,4 +100,5 @@ rm -rf %{buildroot}
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libexempi.so.3
+/usr/lib64/libexempi.so.3.3.0
