@@ -5,21 +5,20 @@
 # Source0 file verified with key 0x5FEE05E6A56E15A3 (hub@nit.ca)
 #
 Name     : exempi
-Version  : 2.3.0
-Release  : 3
-URL      : https://libopenraw.freedesktop.org/download/exempi-2.3.0.tar.bz2
-Source0  : https://libopenraw.freedesktop.org/download/exempi-2.3.0.tar.bz2
-Source99 : https://libopenraw.freedesktop.org/download/exempi-2.3.0.tar.bz2.asc
+Version  : 2.4.1
+Release  : 4
+URL      : https://libopenraw.freedesktop.org/download/exempi-2.4.1.tar.bz2
+Source0  : https://libopenraw.freedesktop.org/download/exempi-2.4.1.tar.bz2
+Source99 : https://libopenraw.freedesktop.org/download/exempi-2.4.1.tar.bz2.asc
 Summary  : Library for easy parsing of XMP metadata.
 Group    : Development/Tools
-License  : BSD-3-Clause
+License  : BSD-3-Clause-Clear
 Requires: exempi-bin
 Requires: exempi-lib
 Requires: exempi-doc
 BuildRequires : boost-dev
 BuildRequires : expat-dev
 BuildRequires : pkgconfig(zlib)
-BuildRequires : valgrind
 
 %description
 exempi is a port of Adobe XMP SDK to work on UNIX and to be build with
@@ -61,11 +60,11 @@ lib components for the exempi package.
 
 
 %prep
-%setup -q -n exempi-2.3.0
+%setup -q -n exempi-2.4.1
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1485186413
+export SOURCE_DATE_EPOCH=1485188732
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -77,7 +76,7 @@ export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1485186413
+export SOURCE_DATE_EPOCH=1485188732
 rm -rf %{buildroot}
 %make_install
 
@@ -104,4 +103,4 @@ rm -rf %{buildroot}
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libexempi.so.3
-/usr/lib64/libexempi.so.3.3.0
+/usr/lib64/libexempi.so.3.4.1
