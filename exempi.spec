@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x5FEE05E6A56E15A3 (hub@nit.ca)
 #
 Name     : exempi
-Version  : 2.4.1
-Release  : 4
-URL      : https://libopenraw.freedesktop.org/download/exempi-2.4.1.tar.bz2
-Source0  : https://libopenraw.freedesktop.org/download/exempi-2.4.1.tar.bz2
-Source99 : https://libopenraw.freedesktop.org/download/exempi-2.4.1.tar.bz2.asc
+Version  : 2.4.2
+Release  : 5
+URL      : https://libopenraw.freedesktop.org/download/exempi-2.4.2.tar.bz2
+Source0  : https://libopenraw.freedesktop.org/download/exempi-2.4.2.tar.bz2
+Source99 : https://libopenraw.freedesktop.org/download/exempi-2.4.2.tar.bz2.asc
 Summary  : Library for easy parsing of XMP metadata.
 Group    : Development/Tools
 License  : BSD-3-Clause-Clear
@@ -60,11 +60,11 @@ lib components for the exempi package.
 
 
 %prep
-%setup -q -n exempi-2.4.1
+%setup -q -n exempi-2.4.2
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1485188732
+export SOURCE_DATE_EPOCH=1486315195
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -76,7 +76,7 @@ export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1485188732
+export SOURCE_DATE_EPOCH=1486315195
 rm -rf %{buildroot}
 %make_install
 
@@ -103,4 +103,4 @@ rm -rf %{buildroot}
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libexempi.so.3
-/usr/lib64/libexempi.so.3.4.1
+/usr/lib64/libexempi.so.3.4.2
