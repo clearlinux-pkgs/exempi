@@ -1,3 +1,10 @@
+2.4.3 - 2017/08/03
+
+- Bug #100397: Fix a buffer overrun, memcpy() on overlapping
+  regions, use after free in the exception handling.
+- Bug #101913: Fix a fatal assert with corrupt WEBP.
+- Bug #101914: Fix a crash on a corrupt file.
+
 2.4.2 - 2017/01/29
 
 - Properly define BanAllEntityUsage.
