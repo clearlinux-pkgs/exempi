@@ -6,7 +6,7 @@
 #
 Name     : exempi
 Version  : 2.4.5
-Release  : 11
+Release  : 12
 URL      : https://libopenraw.freedesktop.org/download/exempi-2.4.5.tar.bz2
 Source0  : https://libopenraw.freedesktop.org/download/exempi-2.4.5.tar.bz2
 Source99 : https://libopenraw.freedesktop.org/download/exempi-2.4.5.tar.bz2.asc
@@ -15,10 +15,12 @@ Group    : Development/Tools
 License  : BSD-3-Clause-Clear
 Requires: exempi-bin
 Requires: exempi-lib
-Requires: exempi-doc
+Requires: exempi-license
+Requires: exempi-man
 BuildRequires : boost-dev
 BuildRequires : expat-dev
 BuildRequires : pkgconfig(zlib)
+Patch1: cve-2018-12648.patch
 
 %description
 exempi is a port of Adobe XMP SDK to work on UNIX and to be build with
@@ -27,6 +29,8 @@ GNU automake.
 %package bin
 Summary: bin components for the exempi package.
 Group: Binaries
+Requires: exempi-license
+Requires: exempi-man
 
 %description bin
 bin components for the exempi package.
@@ -43,31 +47,45 @@ Provides: exempi-devel
 dev components for the exempi package.
 
 
-%package doc
-Summary: doc components for the exempi package.
-Group: Documentation
-
-%description doc
-doc components for the exempi package.
-
-
 %package lib
 Summary: lib components for the exempi package.
 Group: Libraries
+Requires: exempi-license
 
 %description lib
 lib components for the exempi package.
 
 
+%package license
+Summary: license components for the exempi package.
+Group: Default
+
+%description license
+license components for the exempi package.
+
+
+%package man
+Summary: man components for the exempi package.
+Group: Default
+
+%description man
+man components for the exempi package.
+
+
 %prep
 %setup -q -n exempi-2.4.5
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1520778541
+export SOURCE_DATE_EPOCH=1534600997
+export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -79,8 +97,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1520778541
+export SOURCE_DATE_EPOCH=1534600997
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/exempi
+cp COPYING %{buildroot}/usr/share/doc/exempi/COPYING
 %make_install
 
 %files
@@ -99,11 +119,15 @@ rm -rf %{buildroot}
 /usr/lib64/libexempi.so
 /usr/lib64/pkgconfig/exempi-2.0.pc
 
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/man/man1/*
-
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libexempi.so.3
 /usr/lib64/libexempi.so.3.4.5
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/exempi/COPYING
+
+%files man
+%defattr(-,root,root,-)
+/usr/share/man/man1/exempi.1
