@@ -6,17 +6,17 @@
 #
 Name     : exempi
 Version  : 2.4.5
-Release  : 12
+Release  : 13
 URL      : https://libopenraw.freedesktop.org/download/exempi-2.4.5.tar.bz2
 Source0  : https://libopenraw.freedesktop.org/download/exempi-2.4.5.tar.bz2
 Source99 : https://libopenraw.freedesktop.org/download/exempi-2.4.5.tar.bz2.asc
-Summary  : Library for easy parsing of XMP metadata.
+Summary  : A library to parse XMP metadata
 Group    : Development/Tools
 License  : BSD-3-Clause-Clear
-Requires: exempi-bin
-Requires: exempi-lib
-Requires: exempi-license
-Requires: exempi-man
+Requires: exempi-bin = %{version}-%{release}
+Requires: exempi-lib = %{version}-%{release}
+Requires: exempi-license = %{version}-%{release}
+Requires: exempi-man = %{version}-%{release}
 BuildRequires : boost-dev
 BuildRequires : expat-dev
 BuildRequires : pkgconfig(zlib)
@@ -29,8 +29,7 @@ GNU automake.
 %package bin
 Summary: bin components for the exempi package.
 Group: Binaries
-Requires: exempi-license
-Requires: exempi-man
+Requires: exempi-license = %{version}-%{release}
 
 %description bin
 bin components for the exempi package.
@@ -39,9 +38,10 @@ bin components for the exempi package.
 %package dev
 Summary: dev components for the exempi package.
 Group: Development
-Requires: exempi-lib
-Requires: exempi-bin
-Provides: exempi-devel
+Requires: exempi-lib = %{version}-%{release}
+Requires: exempi-bin = %{version}-%{release}
+Provides: exempi-devel = %{version}-%{release}
+Requires: exempi = %{version}-%{release}
 
 %description dev
 dev components for the exempi package.
@@ -50,7 +50,7 @@ dev components for the exempi package.
 %package lib
 Summary: lib components for the exempi package.
 Group: Libraries
-Requires: exempi-license
+Requires: exempi-license = %{version}-%{release}
 
 %description lib
 lib components for the exempi package.
@@ -81,11 +81,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1534600997
-export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export SOURCE_DATE_EPOCH=1557084418
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
+export FCFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
+export FFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
+export CXXFLAGS="$CXXFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -97,10 +100,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1534600997
+export SOURCE_DATE_EPOCH=1557084418
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/exempi
-cp COPYING %{buildroot}/usr/share/doc/exempi/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/exempi
+cp COPYING %{buildroot}/usr/share/package-licenses/exempi/COPYING
 %make_install
 
 %files
@@ -125,9 +128,9 @@ cp COPYING %{buildroot}/usr/share/doc/exempi/COPYING
 /usr/lib64/libexempi.so.3.4.5
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/exempi/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/exempi/COPYING
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/exempi.1
