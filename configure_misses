@@ -1,3 +1,8 @@
 Configure miss: valgrind/memcheck.h usability
 Configure miss: valgrind/memcheck.h presence
 Configure miss: valgrind/memcheck.h
+Configure miss: whether C++ compiler accepts -Werror=unknown-warning-option
+Configure miss: whether C++ compiler accepts -Wexceptions
+Configure miss: whether C++ compiler accepts -Wheader-guard
+Configure miss: whether C++ compiler accepts -Wpointer-bool-conversion
+Configure miss: whether C++ compiler accepts -Wnull-conversion

@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x5FEE05E6A56E15A3 (hub@nit.ca)
 #
 Name     : exempi
-Version  : 2.4.5
-Release  : 13
-URL      : https://libopenraw.freedesktop.org/download/exempi-2.4.5.tar.bz2
-Source0  : https://libopenraw.freedesktop.org/download/exempi-2.4.5.tar.bz2
-Source99 : https://libopenraw.freedesktop.org/download/exempi-2.4.5.tar.bz2.asc
-Summary  : A library to parse XMP metadata
+Version  : 2.5.0
+Release  : 14
+URL      : https://libopenraw.freedesktop.org/download/exempi-2.5.0.tar.bz2
+Source0  : https://libopenraw.freedesktop.org/download/exempi-2.5.0.tar.bz2
+Source99 : https://libopenraw.freedesktop.org/download/exempi-2.5.0.tar.bz2.asc
+Summary  : Library for easy parsing of XMP metadata.
 Group    : Development/Tools
 License  : BSD-3-Clause-Clear
 Requires: exempi-bin = %{version}-%{release}
@@ -73,7 +73,7 @@ man components for the exempi package.
 
 
 %prep
-%setup -q -n exempi-2.4.5
+%setup -q -n exempi-2.5.0
 %patch1 -p1
 
 %build
@@ -81,14 +81,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1557084418
+export SOURCE_DATE_EPOCH=1558462739
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
-export FCFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
-export FFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
-export CXXFLAGS="$CXXFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -100,7 +101,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1557084418
+export SOURCE_DATE_EPOCH=1558462739
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/exempi
 cp COPYING %{buildroot}/usr/share/package-licenses/exempi/COPYING
@@ -124,8 +125,8 @@ cp COPYING %{buildroot}/usr/share/package-licenses/exempi/COPYING
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/libexempi.so.3
-/usr/lib64/libexempi.so.3.4.5
+/usr/lib64/libexempi.so.8
+/usr/lib64/libexempi.so.8.0.0
 
 %files license
 %defattr(0644,root,root,0755)
