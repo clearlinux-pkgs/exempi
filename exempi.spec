@@ -6,7 +6,7 @@
 #
 Name     : exempi
 Version  : 2.5.0
-Release  : 14
+Release  : 15
 URL      : https://libopenraw.freedesktop.org/download/exempi-2.5.0.tar.bz2
 Source0  : https://libopenraw.freedesktop.org/download/exempi-2.5.0.tar.bz2
 Source99 : https://libopenraw.freedesktop.org/download/exempi-2.5.0.tar.bz2.asc
