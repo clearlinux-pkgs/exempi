@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x5FEE05E6A56E15A3 (hub@nit.ca)
 #
 Name     : exempi
-Version  : 2.5.0
-Release  : 15
-URL      : https://libopenraw.freedesktop.org/download/exempi-2.5.0.tar.bz2
-Source0  : https://libopenraw.freedesktop.org/download/exempi-2.5.0.tar.bz2
-Source99 : https://libopenraw.freedesktop.org/download/exempi-2.5.0.tar.bz2.asc
+Version  : 2.5.1
+Release  : 16
+URL      : https://libopenraw.freedesktop.org/download/exempi-2.5.1.tar.bz2
+Source0  : https://libopenraw.freedesktop.org/download/exempi-2.5.1.tar.bz2
+Source1  : https://libopenraw.freedesktop.org/download/exempi-2.5.1.tar.bz2.asc
 Summary  : Library for easy parsing of XMP metadata.
 Group    : Development/Tools
 License  : BSD-3-Clause-Clear
@@ -20,7 +20,7 @@ Requires: exempi-man = %{version}-%{release}
 BuildRequires : boost-dev
 BuildRequires : expat-dev
 BuildRequires : pkgconfig(zlib)
-Patch1: cve-2018-12648.patch
+BuildRequires : valgrind-dev
 
 %description
 exempi is a port of Adobe XMP SDK to work on UNIX and to be build with
@@ -73,15 +73,15 @@ man components for the exempi package.
 
 
 %prep
-%setup -q -n exempi-2.5.0
-%patch1 -p1
+%setup -q -n exempi-2.5.1
+cd %{_builddir}/exempi-2.5.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1558462739
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1579720053
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -94,17 +94,17 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-stron
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1558462739
+export SOURCE_DATE_EPOCH=1579720053
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/exempi
-cp COPYING %{buildroot}/usr/share/package-licenses/exempi/COPYING
+cp %{_builddir}/exempi-2.5.1/COPYING %{buildroot}/usr/share/package-licenses/exempi/8c19863c6b812ba1d7facd6f9ef8b8c854e574ee
 %make_install
 
 %files
@@ -130,7 +130,7 @@ cp COPYING %{buildroot}/usr/share/package-licenses/exempi/COPYING
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/exempi/COPYING
+/usr/share/package-licenses/exempi/8c19863c6b812ba1d7facd6f9ef8b8c854e574ee
 
 %files man
 %defattr(0644,root,root,0755)
