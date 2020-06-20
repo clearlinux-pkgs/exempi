@@ -6,7 +6,7 @@
 #
 Name     : exempi
 Version  : 2.5.1
-Release  : 17
+Release  : 18
 URL      : https://libopenraw.freedesktop.org/download/exempi-2.5.1.tar.bz2
 Source0  : https://libopenraw.freedesktop.org/download/exempi-2.5.1.tar.bz2
 Source1  : https://libopenraw.freedesktop.org/download/exempi-2.5.1.tar.bz2.asc
@@ -81,14 +81,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1579720053
+export SOURCE_DATE_EPOCH=1592618419
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
@@ -101,7 +101,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1579720053
+export SOURCE_DATE_EPOCH=1592618419
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/exempi
 cp %{_builddir}/exempi-2.5.1/COPYING %{buildroot}/usr/share/package-licenses/exempi/8c19863c6b812ba1d7facd6f9ef8b8c854e574ee
