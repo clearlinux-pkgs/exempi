@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x5FEE05E6A56E15A3 (hub@nit.ca)
 #
 Name     : exempi
-Version  : 2.5.2
-Release  : 20
-URL      : https://libopenraw.freedesktop.org/download/exempi-2.5.2.tar.bz2
-Source0  : https://libopenraw.freedesktop.org/download/exempi-2.5.2.tar.bz2
-Source1  : https://libopenraw.freedesktop.org/download/exempi-2.5.2.tar.bz2.asc
+Version  : 2.6.2
+Release  : 21
+URL      : https://libopenraw.freedesktop.org/download/exempi-2.6.2.tar.bz2
+Source0  : https://libopenraw.freedesktop.org/download/exempi-2.6.2.tar.bz2
+Source1  : https://libopenraw.freedesktop.org/download/exempi-2.6.2.tar.bz2.asc
 Summary  : Library for easy parsing of XMP metadata.
 Group    : Development/Tools
 License  : BSD-3-Clause-Clear
@@ -23,8 +23,8 @@ BuildRequires : pkgconfig(zlib)
 BuildRequires : valgrind-dev
 
 %description
-exempi is a port of Adobe XMP SDK to work on UNIX and to be build with
-GNU automake.
+# XMP-Toolkit-SDK
+The XMP Toolkit allows you to integrate XMP functionality into your product or solution. It supports Macintosh, Windows, as well as UNIX and comes with samples, documentation, source code and scripts to generate project files. The XMP Toolkit is available under the BSD license. The specification is provided under the [XMP Specification Public Patent License](https://wwwimages2.adobe.com/content/dam/acom/en/devnet/xmp/pdfs/cs6/xmp_public_patent_license.pdf)
 
 %package bin
 Summary: bin components for the exempi package.
@@ -73,23 +73,23 @@ man components for the exempi package.
 
 
 %prep
-%setup -q -n exempi-2.5.2
-cd %{_builddir}/exempi-2.5.2
+%setup -q -n exempi-2.6.2
+cd %{_builddir}/exempi-2.6.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1615509096
+export SOURCE_DATE_EPOCH=1668019754
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -101,10 +101,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1615509096
+export SOURCE_DATE_EPOCH=1668019754
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/exempi
-cp %{_builddir}/exempi-2.5.2/COPYING %{buildroot}/usr/share/package-licenses/exempi/8c19863c6b812ba1d7facd6f9ef8b8c854e574ee
+cp %{_builddir}/exempi-%{version}/COPYING %{buildroot}/usr/share/package-licenses/exempi/8c19863c6b812ba1d7facd6f9ef8b8c854e574ee || :
 %make_install
 
 %files
@@ -126,7 +126,7 @@ cp %{_builddir}/exempi-2.5.2/COPYING %{buildroot}/usr/share/package-licenses/exe
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libexempi.so.8
-/usr/lib64/libexempi.so.8.0.2
+/usr/lib64/libexempi.so.8.1.2
 
 %files license
 %defattr(0644,root,root,0755)
