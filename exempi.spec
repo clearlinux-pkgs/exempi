@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x5FEE05E6A56E15A3 (hub@nit.ca)
 #
 Name     : exempi
-Version  : 2.6.2
-Release  : 21
-URL      : https://libopenraw.freedesktop.org/download/exempi-2.6.2.tar.bz2
-Source0  : https://libopenraw.freedesktop.org/download/exempi-2.6.2.tar.bz2
-Source1  : https://libopenraw.freedesktop.org/download/exempi-2.6.2.tar.bz2.asc
+Version  : 2.6.3
+Release  : 22
+URL      : https://libopenraw.freedesktop.org/download/exempi-2.6.3.tar.xz
+Source0  : https://libopenraw.freedesktop.org/download/exempi-2.6.3.tar.xz
+Source1  : https://libopenraw.freedesktop.org/download/exempi-2.6.3.tar.xz.asc
 Summary  : Library for easy parsing of XMP metadata.
 Group    : Development/Tools
 License  : BSD-3-Clause-Clear
@@ -73,15 +73,15 @@ man components for the exempi package.
 
 
 %prep
-%setup -q -n exempi-2.6.2
-cd %{_builddir}/exempi-2.6.2
+%setup -q -n exempi-2.6.3
+cd %{_builddir}/exempi-2.6.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1668019754
+export SOURCE_DATE_EPOCH=1672172887
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -101,10 +101,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1668019754
+export SOURCE_DATE_EPOCH=1672172887
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/exempi
-cp %{_builddir}/exempi-%{version}/COPYING %{buildroot}/usr/share/package-licenses/exempi/8c19863c6b812ba1d7facd6f9ef8b8c854e574ee || :
+cp %{_builddir}/exempi-%{version}/COPYING %{buildroot}/usr/share/package-licenses/exempi/8c19863c6b812ba1d7facd6f9ef8b8c854e574ee
 %make_install
 
 %files
@@ -126,7 +126,7 @@ cp %{_builddir}/exempi-%{version}/COPYING %{buildroot}/usr/share/package-license
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libexempi.so.8
-/usr/lib64/libexempi.so.8.1.2
+/usr/lib64/libexempi.so.8.1.3
 
 %files license
 %defattr(0644,root,root,0755)

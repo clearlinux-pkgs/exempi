@@ -5,3 +5,4 @@ Configure miss: whether C++ compiler accepts -Wgnu-array-member-paren-init
 Configure miss: whether C++ compiler accepts -Wheader-guard
 Configure miss: whether C++ compiler accepts -Wnull-conversion
 Configure miss: whether C++ compiler accepts -Wpointer-bool-conversion
+Configure miss: x86_64-generic-linux-gnu-file
