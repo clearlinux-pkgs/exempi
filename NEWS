@@ -1,3 +1,14 @@
+2.6.4 - 2023/07/06
+
+- Update XMPCore to Adobe XMP SDK v2023.07
+  - Security Fixes.
+  - Fix Exif Date missing seconds values.
+    https://github.com/adobe/XMP-Toolkit-SDK/issues/50
+- Fix some portability build issues with dlopen on BSD:
+  https://gitlab.freedesktop.org/libopenraw/exempi/-/merge_requests/7
+  (Alyssa Ross)
+- Added missing file type constants from the XMP_SDK.
+
 2.6.3 - 2022/12/10
 
 - Issue #29: Update the config.guess and config.sub files in the tarball.
